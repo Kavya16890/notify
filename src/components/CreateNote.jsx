@@ -77,27 +77,30 @@ const CreateNote = () => {
 
       <h1 className="text-3xl mt-3">Your Created Note</h1>
       <div className="notes p-5 flex gap-4 flex-wrap">
-        {notes.map((note) => (
+      {notes.length === 0 ? 
+      ( <p className="text-zinc-500 text-lg">There is no notes.</p> 
+      ) : (
+        notes.map((note) => (
           <div key={note._id}>
             <div className="note rounded-lg border border-gray-400 min-w-[20rem] h-full mt-3 shadow-sm transition-all">
               <h1 className="text-xl ml-2 mt-1">{note.title}</h1>
               <hr className="text-gray-400 mt-0.5" />
               <p className="ml-2 mb-1 mt-3">{note.description}</p>
               <Link
-                className="px-2 py-1 text-white bg-blue-400 hover:bg-blue-500 mb-2 rounded ml-2 mt-2 transition-all"
+                className="px-2 py-1 text-white bg-blue-400 hover:bg-blue-500 mb-2 rounded ml-2 mt-3 transition-all"
                 to={`/update/${note._id}`}
               >
                 Update
               </Link>
               <Link
-                className="px-2 py-1 text-white  bg-red-400 hover:bg-red-500 mb-2 rounded ml-2 mt-2 transition-all"
+                className="px-2 py-1 text-white  bg-red-400 hover:bg-red-500 mb-2 rounded ml-2 mt-3 transition-all"
                 onClick={() => handleDelete(note._id)}
               >
                 Delete
               </Link>
             </div>
           </div>
-        ))}
+        )))}
       </div>
     </div>
   );
