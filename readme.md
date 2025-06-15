@@ -33,7 +33,6 @@ A simple full-stack Notes application built using **React** for the frontend, **
 
 ## 📁 Project Structure
 
----
 root/
 │
 ├── backend/
