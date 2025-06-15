@@ -33,6 +33,7 @@ A simple full-stack Notes application built using **React** for the frontend, **
 
 ## 📁 Project Structure
 
+---
 root/
 │
 ├── backend/
@@ -62,5 +63,5 @@ root/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/notes-app.git
-cd notes-app
+git clone https://github.com/Kavya16890/notify.git
+cd notify
