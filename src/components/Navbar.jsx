@@ -1,23 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem("darkMode");
-    return saved === "true";
-    console.log(saved);
-  });
-
-  useEffect(() => {
-    localStorage.setItem("darkMode", darkMode);
-    if (darkMode) {
-      document.body.style.backgroundColor = "#27272a";
-      document.body.style.color = "#fff";
-    } else {
-      document.body.style.backgroundColor = "#fff";
-      document.body.style.color = "black";
-    }
-  }, [darkMode]);
+const Navbar = (props) => {
   return (
     <div className="">
       <nav className="shadow-lg py-5 bg-zin">
@@ -30,10 +13,10 @@ const Navbar = () => {
             About
           </Link>
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={() => props.setDarkMode(!props.darkMode)}
             className="px-2 py-1 rounded bg-blue-500 hover:bg-blue-600 transition-all text-white justify-end"
           >
-            {darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'}
+            {props.darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'}
           </button>
         </ul>
       </nav>

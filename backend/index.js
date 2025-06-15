@@ -2,7 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./middleware/DB");
 const Note = require("./model/Note");
+const User = require("./model/User");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(express.json());
@@ -65,10 +67,59 @@ app.put("/update/:id", async (req, res) => {
   }
 });
 
-app.get('/notes/:id', async(req, res)=>{
-    const note = await Note.findById(req.params.id)
-    res.json(note)
-})
+app.get("/notes/:id", async (req, res) => {
+  const note = await Note.findById(req.params.id);
+  res.json(note);
+});
+
+app.post("/signup", async (req, res) => {
+  let { name, email, password } = req.body;
+  try {
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      res.status(400).json({ message: "This user already exists." });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({
+      name: name,
+      email: email,
+      password: hashedPassword,
+    });
+    res.status(201).json({
+      message: "User has been created.",
+      User: user,
+    });
+  } catch (err) {
+    res.status(500).json({ error: "something went wrong." });
+  }
+});
+
+app.get("/login", async (req, res) => {
+  let { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(404).json({ error: "no user Found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      res.status(401).json({ error: "email or password is invalid." });
+    }
+
+    res.status(201).json({
+      name: user.name,
+      id: user._id,
+      email: user.email
+    })
+  } catch (err) {
+    res.status(500).json({ error: "something went wrong." });
+  }
+});
 
 app.listen(5000, () => {
   console.log("Server is running.");
