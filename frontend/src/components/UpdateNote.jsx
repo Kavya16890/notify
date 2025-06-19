@@ -11,7 +11,7 @@ const UpdateNote = () => {
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/notes/${id}`);
+        const res = await fetch(`https://notify-qc3m.onrender.com/${id}`);
         const data = await res.json();
         setNote(data);
       } catch (err) {
@@ -22,7 +22,7 @@ const UpdateNote = () => {
   }, [id]);
   const updateNote = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/update/${id}`, {
+      const res = await fetch(`https://notify-qc3m.onrender.com/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const CreateNote = (props) => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await fetch("http://localhost:5000/notes");
+        const res = await fetch("https://notify-qc3m.onrender.com/notes");
         const data = await res.json();
         setNotes(data);
       } catch (err) {
@@ -20,7 +20,7 @@ const CreateNote = (props) => {
 
   const handleCreate = async () => {
     try {
-      const res = await fetch("http://localhost:5000/create", {
+      const res = await fetch("https://notify-qc3m.onrender.com/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const CreateNote = (props) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/delete/${id}`, {
+      const res = await fetch(`https://notify-qc3m.onrender.com/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();

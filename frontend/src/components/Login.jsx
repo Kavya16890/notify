@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const loginUser = async () => {
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch("https://notify-qc3m.onrender.com/login", {
         method: "GET",
       });
       const data = await res.json();
