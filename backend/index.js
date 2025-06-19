@@ -78,7 +78,7 @@ app.post("/signup", async (req, res) => {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      res.status(400).json({ message: "This user already exists." });
+      res.status(400).json("This user already exists.");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -92,7 +92,7 @@ app.post("/signup", async (req, res) => {
       User: user,
     });
   } catch (err) {
-    res.status(500).json({ error: "something went wrong." });
+    res.status(500).json( "something went wrong.");
   }
 });
 
@@ -102,13 +102,13 @@ app.get("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(404).json({ error: "no user Found" });
+      res.status(404).json( "no user Found" );
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(401).json({ error: "email or password is invalid." });
+      res.status(401).json( "email or password is invalid." );
     }
 
     res.status(201).json({
@@ -117,7 +117,7 @@ app.get("/login", async (req, res) => {
       email: user.email
     })
   } catch (err) {
-    res.status(500).json({ error: "something went wrong." });
+    res.status(500).json( "something went wrong." );
   }
 });
 
