@@ -10,6 +10,7 @@ const CreateNote = (props) => {
       try {
         const res = await fetch("https://notify-qc3m.onrender.com/notes");
         const data = await res.json();
+        console.log(data)
         setNotes(data);
       } catch (err) {
         console.error("Error: ", err.message);
