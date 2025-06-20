@@ -22,7 +22,7 @@ const UpdateNote = () => {
   }, [id]);
   const updateNote = async () => {
     try {
-      const res = await fetch(`https://notify-qc3m.onrender.com/${id}`, {
+      const res = await fetch(`https://notify-qc3m.onrender.com/update/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
