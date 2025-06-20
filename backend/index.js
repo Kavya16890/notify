@@ -3,12 +3,12 @@ const express = require("express");
 const connectDB = require("./middleware/DB");
 const Note = require("./model/Note");
 const User = require("./model/User");
-// const cors = require("cors");
+const cors = require("cors");
 const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 connectDB();
 
 app.get("/", (req, res) => {
