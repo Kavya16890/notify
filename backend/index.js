@@ -42,7 +42,7 @@ app.delete("/delete/:id", async (req, res) => {
 
   try {
     const DeletedNote = await Note.findByIdAndDelete(noteId);
-    res.status(201).json("Deleted", DeletedNote);
+    res.status(201).json(DeletedNote);
   } catch (err) {
     res.status(500).json("error in to delete Note", err.message);
   }
@@ -63,7 +63,7 @@ app.put("/update/:id", async (req, res) => {
       note: updatedNote,
     });
   } catch (err) {
-    res.status(500).json("error: ", err.message);
+    res.status(500).json(err.message);
   }
 });
 
@@ -72,54 +72,54 @@ app.get("/notes/:id", async (req, res) => {
   res.json(note);
 });
 
-app.post("/signup", async (req, res) => {
-  let { name, email, password } = req.body;
-  try {
-    const existingUser = await User.findOne({ email });
+// app.post("/signup", async (req, res) => {
+//   let { name, email, password } = req.body;
+//   try {
+//     const existingUser = await User.findOne({ email });
 
-    if (existingUser) {
-      res.status(400).json("This user already exists.");
-    }
+//     if (existingUser) {
+//       res.status(400).json("This user already exists.");
+//     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
-      name: name,
-      email: email,
-      password: hashedPassword,
-    });
-    res.status(201).json({
-      message: "User has been created.",
-      User: user,
-    });
-  } catch (err) {
-    res.status(500).json( "something went wrong.");
-  }
-});
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const user = await User.create({
+//       name: name,
+//       email: email,
+//       password: hashedPassword,
+//     });
+//     res.status(201).json({
+//       message: "User has been created.",
+//       User: user,
+//     });
+//   } catch (err) {
+//     res.status(500).json( "something went wrong.");
+//   }
+// });
 
-app.get("/login", async (req, res) => {
-  let { email, password } = req.body;
+// app.get("/login", async (req, res) => {
+//   let { email, password } = req.body;
 
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      res.status(404).json( "no user Found" );
-    }
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       res.status(404).json( "no user Found" );
+//     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+//     const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      res.status(401).json( "email or password is invalid." );
-    }
+//     if (!isMatch) {
+//       res.status(401).json( "email or password is invalid." );
+//     }
 
-    res.status(201).json({
-      name: user.name,
-      id: user._id,
-      email: user.email
-    })
-  } catch (err) {
-    res.status(500).json( "something went wrong." );
-  }
-});
+//     res.status(201).json({
+//       name: user.name,
+//       id: user._id,
+//       email: user.email
+//     })
+//   } catch (err) {
+//     res.status(500).json( "something went wrong." );
+//   }
+// });
 
 app.listen(5000, () => {
   console.log("Server is running.");
