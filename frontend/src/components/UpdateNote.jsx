@@ -11,7 +11,7 @@ const UpdateNote = () => {
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const res = await fetch(`https://notify-qc3m.onrender.com/${id}`);
+        const res = await fetch(`https://notify-qc3m.onrender.com/notes/${id}`);
         const data = await res.json();
         setNote(data);
       } catch (err) {
